@@ -1,0 +1,38 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        if (!Schema::hasColumn('customer', 'coa_id')) {
+            Schema::table('customer', function (Blueprint $table) {
+//                $table->integer('coa_id')->nullable()->default(0);
+            });
+        }
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        if (Schema::hasColumn('customer', 'coa_id')) {
+//            Schema::table('customer', function (Blueprint $table) {
+//                $table->dropColumn('coa_id');
+//            });
+        }
+
+        if (Schema::hasColumn('saledata', 'coa_id')) {
+            Schema::table('saledata', function (Blueprint $table) {
+                $table->dropColumn('coa_id');
+            });
+        }
+    }
+};

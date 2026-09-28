@@ -1,0 +1,131 @@
+{
+    //Mandatory
+    "manifest_version": 1,
+    "type": "WebApp",
+    //Mandatory, The app metadata
+    "meta": {
+        "name": "Name of your app",
+        "author": "Author name",
+        "version": "1.2.3.456",
+        "minimum-overwolf-version": "128.0.0.1",
+        "minimum-gep-version": "128.0.0.1",
+        "description": "A plain text description",
+        "dock_button_title": "Short name of your app",
+        "icon": "iconMouseOver.png",
+        "icon_gray": "iconMouseNormal.png",
+        "launcher_icon": "icon.ico",
+        "splash_image": "splashIcon.png",
+        "window_icon": "windowIcon.png"
+    },
+    //An array of permissions that the app requires
+    "permissions": ["Streaming","Hotkeys","GameInfo"],
+    "max_rotation_log_files": 20,
+    //Mandatory, a list of additional meta-data on the app
+    "data": {
+        //An app can declare itself as targeted to one game or more
+        "game_targeting": {"type": "dedicated","game_ids": [10906, 7764]},
+        //The name of the window (from the “windows” list) initially loaded when the app starts
+        "start_window": "windowName",
+        "enable_top_isolation": true,
+         //A map from window names to window settings
+        "windows": {
+            "windowName": {
+                //Mandatory. Points to the file to be loaded inside the window
+                "file": "name.html",
+                "show_in_taskbar": true,
+                "transparent": true,
+                "override_on_update": true,
+                "resizable": false,
+                "show_minimize": true,
+                "clickthrough": false,
+                "style": "inputPassThrough",
+                "disable_rightclick": false,
+                "forcecapture": false,
+                "show_only_on_stream": false,
+                "ignore_keyboard_events": false,
+                "in_game_only": false,
+                "desktop_only": false,
+                "disable_restore_animation": false,
+                "grab_keyboard_focus": false,
+                "size": {...},
+                "min_size": {...},
+                "max_size": {...},
+                "start_position": {...},
+                "topmost": false,
+                "bottommost": false,
+                "block_top_window_navigation": true,
+                "keep_window_location": true,
+                "use_os_windowing": false,
+                "background_optimization": true,
+                "mute": true,
+                "mute_excluded_hosts": ["..."],
+                "popup_blocker": false,
+                "show_maximize": true,
+                "disable_blur": false,
+                "native_window": false,
+                "is_background_page": true,
+                "focus_game_takeover": "ReleaseOnLostFocus",
+                "focus_game_takeover_release_hotkey": "...",
+                "allow_local_file_access": true,
+                "is_alt_f4_blocked": false,
+                "dev_tools_window_style": false,
+                "debug_url": "http://localhost:3000",
+                "optimize_accelerate_rendering": false, //Use directly shared texture rendering in game (only DX11)
+                "disable_auto_dpi_sizing": false, //disable the DPI Aware behavior of native windows
+                "restrict_to_game_bounds": false, //Restrict window to game client (window) area.
+                "disable_hardware_acceleration": false, // Disable GPU hardware acceleration, per window. <br/>*Notes: Use this flag mainly for native windows that run as a second-screen with fps intensive games. It improves the performance of the game by reducing usage of the GPU while you are playing.*
+                "open_dev_tools": true //Used for debugging, automatically opens the dev tools when the app window opens
+            },
+        },
+        //Toggle printing of ads log to the console
+        "enable_top_isolated_sites_console": false,
+        //External URLs the web app should be able to access
+        "externally_connectable": { "matches": ["http://*.overwolf.com", "https://*.overwolf.com", "https://*.google-analytics.com"] },
+        //Override the relative protocol with a preferred one
+        "protocol_override_domains": {"domain.com": "http","ajax.googleapis.com": "https"},
+        //Causes links in the app to be opened using the user’s default browser ("user") or Overwolf’s browser ("overwolf")
+        "force_browser": "user"/"overwolf",
+        //Enable OSR|GPU acceleration if supported by this machine
+        "enable_osr_acceleration": true,
+        //A list of game ids for which game events are required
+        "game_events": [...],
+        //Disable the log file 1000 lines limitation. Don't enable it without Overwolf approval.
+        "disable_log_limit": false,
+        //Allows the access of custom plugin dlls
+        "extra-objects": {"my-plugin":{"file":"plugins/my_plugin.dll","class":"MyPlugin.EntryPoint"}},
+        //shortcut keys that trigger an app action
+        "hotkeys":{"save_YourAppName": {"title": "Save Replay for later", "action-type":"custom", "default":"Ctrl+Shift+F9"}},
+        //A list of content scripts to be loaded for specific windows
+        "content_scripts": [{ "windows": [ "index" ], "js": [ "myscript.js" ] }],
+        //A list of events causing the app to launch
+        "launch_events": [{"event": "GameLaunch", "event_data":{"game_ids": [1136]}, "start_minimized": true}],
+        //Disable opening of the developer tools for the app
+        "disable_dt": false,
+        //hosting app flexible data
+        "service_providers": {"nafihghfcpikebhfhdhljejkcifgbdahdhngepfb": {"whatever": "value"}},
+        //Additional setting for developers (only when the app is in dev mode)
+        "developer": {
+                //Enable auto App reloading when detecting local files changes.True by Default
+                "enable_auto_refresh": true,
+                //Reload delay (in ms) when detecting file changes (for multiple change)default is 1000 (1 second)
+                "reload_delay": 1000,
+                //Filter files which will be tracked.e.g (*.js;*.html)Default: all files (*.*)
+                "filter": "*.json;*.html"
+            },
+        //If set to true, app local data will not be cleaned up after app uninstallation
+        "disable_cleanup": true,
+        "process_name": "my sample app",
+        "url_protocol": {"scheme": "testscheme"},
+        "uninstall_window": {
+        //if exists, the client will run this window in the background for the required time before actually uninstalling an app.
+            "file": "name.html",
+            //exactly as other Overwolf windows. this window should not display UI as it runs in the background.
+            "required_runtime": 1000,
+            //if not defined, the default is 10 seconds. valid up to 60000 (1 minute).
+        },
+        "auto_relaunch_on_crash": true,
+        //Automatically relaunches the app if it crashes up to 5 times.
+        "open_dev_tools": true 
+        //Used for debugging, automatically opens the dev tools when an app window opens
+    }
+}
